@@ -14,6 +14,10 @@
 #print (a, '\t',b, '\t', c)
 #print (a1,'\t', b1, '\t', c1)
 
+#PROBLEMA 2 
+import pyfiglet
+titulo = pyfiglet.figlet_format("hola mundo <3")
+print(titulo)
 
 #PROBLEMA 3
 # Escriba un programa que lea 1 palabra (ingresadas por el usuario), calcule la longitud de cada una de ellas y las despliegue
@@ -21,7 +25,7 @@
 # arbol *****
 # hola ****
 
-#word = input('escriba una palabra')
+#word = input("write your name")
 #wordreturn = '*'  * len(word) 
  
 # print (word + ' ' + wordreturn) 
@@ -30,19 +34,19 @@
 #PROBLEMA 4
 # Crear un diccionario del ejercicio anterior 
 
-dictionary = {
-    "name" : "Luciana", 
-    "age" : 28, 
-    "identification" : 37438775, 
-    "passport" : True
-}
+#dictionary = {
+    #"name" : "Luciana", 
+    #"age" : 28, 
+    #"identification" : 37438775, 
+    #"passport" : True
+#}
 
 #print (dictorinary["nombre"])  accedo al value de esa key
 # print(dictionary (d1.get('nombre)) es otro metodo para acceder al  value
 
 #agrega un key value que no existia  
 
-dictionary["address"] = "24 de septiembre 974"
+#dictionary["address"] = "24 de septiembre 974"
 
 # imprimir los key 
 #for x in dictionary: 
@@ -59,22 +63,22 @@ dictionary["address"] = "24 de septiembre 974"
 
 #diccionarios anidados
 
-dic1 = {"name" : "Luciana", 
-    "age" : 28, 
-    "identification" : 37438775, 
-    "passport" : True
-    } 
-dic2 = {"name" : "Julia", 
-    "age" : 24, 
-    "identification" : 40504496, 
-    "passport" : False,
-    "address" : "Moreno 100"
-}
+#dic1 = {"name" : "Luciana", 
+ #  "age" : 28, 
+#   "identification" : 37438775, 
+#   "passport" : True
+#    } 
+#dic2 = {"name" : "Julia", 
+ #   "age" : 24, 
+  #  "identification" : 40504496, 
+   # "passport" : False,
+    #"address" : "Moreno 100"
+#}
 
-d = { 
-    "dic1" : dic1, 
-    "dic2" : dic2
-}
+#d = { 
+ #   "dic1" : dic1, 
+#   "dic2" : dic2
+# }
 
 #permite obtner el value para una key
 #print(dic2.get("name")) 
@@ -121,5 +125,6 @@ d = {
 #se llama sobre un diccionario y tiene como entrada otro diccionario. 
 #los value son actualizados y si no esta algun value del nuevo dicc se añade 
 
-dic1.update(dic2)
-print(dic1)
+#dic1.update(dic2)
+#print(dic1)  en el diccionario 1 no esta presente la key "address"
+#el print muestra la key address que  si está en el  el dic2. 
