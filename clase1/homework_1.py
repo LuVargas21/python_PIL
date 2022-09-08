@@ -14,10 +14,7 @@
 #print (a, '\t',b, '\t', c)
 #print (a1,'\t', b1, '\t', c1)
 
-#PROBLEMA 2 
-import pyfiglet
-titulo = pyfiglet.figlet_format("hola mundo <3")
-print(titulo)
+ 
 
 #PROBLEMA 3
 # Escriba un programa que lea 1 palabra (ingresadas por el usuario), calcule la longitud de cada una de ellas y las despliegue
