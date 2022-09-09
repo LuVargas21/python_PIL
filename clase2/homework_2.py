@@ -69,6 +69,11 @@ while True:
 
         if n1 >= 0  &  n1 < n2: 
             print('Los números pares dentro del rango ingresado son:')
+         
+            for n in range (n1, n2): 
+                if n % 2 == 0: 
+                 print (n)
+
 
 else: 
     print('Datos invalidos')
