@@ -1,0 +1,116 @@
+# -------PRÁCTICO BASE DE DATOS "CLASSICMODELS"-------
+
+#1) ¿ Cuántos empleados tenemos registrados?
+
+SELECT COUNT(*) employees_quantity FROM `employees`;
+
+#2) ¿ Cuántos empleados hay en cada oficina ?
+
+#/* CANTIDAD DE EMPLEADOS EN CADA OFICINA /
+SELECT e.officeCode, COUNT(*) qemployees_in_office FROM employees e GROUP BY e.officeCode;
+
+#/* CANTIDAD DE EMPLEADOS EN CADA OFICINA POR CIUDAD / 
+ SELECT e.officeCode, o.city, COUNT(*) qemployees_in_office
+ FROM employees e INNER JOIN offices o ON (e.officeCode = o.officeCode)
+ GROUP BY e.officeCode, o.city
+ ORDER BY e.officeCode;
+
+#3) ¿ Cuántos productos tenemos por linea ? 
+
+SELECT p.productLine,COUNT(p.productCode) FROM products p GROUP BY p.productLine; 
+
+#4) Listar los productos de la linea PLANES 
+
+SELECT * FROM products p WHERE p.productLine = 'planes'; 
+
+#5) Listar solo los productos que vienen con logos oficiales
+
+SELECT * FROM products p WHERE productDescription LIKE '%logo%'; 
+
+
+#6) ¿ Todos los clientes son del mismo pais ? Que paises? 
+SELECT c.customerNumber, c.country FROM customers c GROUP BY c.customerNumber, c.country;
+
+#7) ¿ Cuál fue el ultimo pago que se registro ? 
+
+OPCION 1
+SELECT p.paymentDate, p.amount FROM payments p ORDER BY p.paymentDate DESC LIMIT 1;
+
+OPCION 2
+SELECT p.paymentDate, p.amount
+FROM payments p
+WHERE p.paymentDate >= (SELECT MAX(pe2.paymentDate) FROM payments pe2);
+
+#8) ¿ Cuál fue el pago mas chico?
+
+SELECT p.customerNumber, p.checkNumber, p.amount 
+FROM payments p
+WHERE p.amount = (SELECT MIN(py.amount) FROM payments py);
+
+#9) Listar los clientes que no tienen pagos
+SELECT c.customerName,  c.customerNumber,  p.amount
+FROM customers c LEFT JOIN  payments p  ON  (c.customerNumber = p.customerNumber)
+WHERE p.customerNumber is NULL;
+
+
+#10) ¿ Cuánto se recaudo en los ultimos 6 meses ?
+SELECT SUM(p.amount)
+ FROM payments p
+ WHERE p.paymentDate BETWEEN '2005-01-01' AND '2005-06-31' ORDER BY p.paymentDate DESC;
+
+#11) ¿ Cuál es el producto mas vendido ?
+SELECT p.productCode, SUM(od.quantityOrdered) soldQuantity
+FROM products p INNER JOIN orderdetails od ON (p.productCode = od.productCode) 
+GROUP BY p.productCode
+ORDER BY soldQuantity
+LIMIT 1;
+
+
+#12) ¿ Cuáles son los 10 mejores clientes ?
+
+SELECT c.customerNumber, c.customerName, c.country, SUM(p.amount)bestClients
+FROM customers c INNER JOIN payments p ON (c.customerNumber = p.customerNumber) 
+GROUP BY c.customerNumber, c.customerName, c.country 
+ORDER BY bestClients DESC
+LIMIT 10;
+
+
+#13) ¿ Cada cuánto tiempo regresa un cliente ?
+SELECT t1.yea, AVG(t1.quantity_purch)
+FROM (
+    SELECT YEAR(o.orderDate) yea, COUNT(o.orderNumber) quantity_purch 
+    FROM orders o
+    GROUP BY YEAR(o.orderDate) 
+    ORDER BY o.customerNumber ASC
+    ) t1
+ GROUP BY t1.yea;
+
+
+
+#14) y 15)¿ Cuántos clientes no tienen registrado su telefono ? ¿Cuáles son?  
+SELECT c.customerName, c.phone, COUNT(*)
+FROM customers c
+WHERE c.phone = 'null';
+
+#16) Listar los productos más vendidos en el último mes registrado y su precio. 
+
+SELECT pr.productCode, pr.productName, od.priceEach, SUM(od.quantityOrdered) total_products_sold
+FROM products pr INNER JOIN orderdetails od ON (pr.productCode = od.productCode)
+		INNER JOIN orders o ON (od.orderNumber = o.orderNumber)
+WHERE o.orderDate BETWEEN '2005-04-31' AND '2005-05-31'  
+GROUP BY pr.productCode, pr.productName, od.priceEach  
+ORDER BY `total_products_sold` DESC;
+
+
+#17) ¿ Quién es el jefe de cada departamento ? 
+
+SELECT e.officeCode, e.jobTitle
+FROM employees e
+WHERE e.jobTitle LIKE '%manager%'
+ORDER BY e.officeCode DESC;
+
+#18) ¿ Cuál es el empleado que mas vende?
+SELECT e.employeeNumber, e.lastName, e.officeCode, SUM(p.amount) totalAmountSold
+FROM employees e INNER JOIN customers c ON (e.employeeNumber = c.salesRepEmployeeNumber) 
+INNER JOIN payments p ON (c.customerNumber = p.customerNumber)
+ORDER BY e.employeeNumber DESC;
