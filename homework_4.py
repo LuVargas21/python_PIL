@@ -82,3 +82,4 @@ perro1.saludar ()
  
 gato1 = gato('Jenni', 'siames', 'gato', 2)
 print(f'gato1 -> {gato1.nombre}, {gato1.raza}, {gato1.especie}, {gato1.edad}')
+
