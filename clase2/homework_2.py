@@ -14,6 +14,7 @@
 print('Bienvenido a e-Bank')
 
 
+
 def processOperation(operation):
     if (operation != ""):
      goBack = True
@@ -23,6 +24,30 @@ def processOperation(operation):
         print ('Volver al menu principal')
     else: 
         print ('Volver al menu anterior')
+
+# def processOperation (operation): 
+#     if (operation != ""): 
+#      goBack = True
+#     while goBack: 
+#       option_exit = input ('Ingrese el monto a' + ' ' + operation + '\n O presione 0 para volver al menú principal')
+#       if option_exit == "0": 
+#         break
+
+      
+# def mainMenu ():
+#   print ('1.Depositos')
+#   print ('2.Extracciones') 
+#   print('3.Transferencia') 
+#   print('4.Salir')
+
+# atm = True
+# while  atm:
+#     mainMenu()
+#     operation = ""
+#     option = int (input('Ingrese la operación que desea realizar'))
+
+#     if int(option)== 1:
+#        processOperation ('Depositar')
     
 
 def mainMenu():
